@@ -48,12 +48,10 @@ namespace Data.Service.Services
                                 {
 
 
-                                    faceDirection.Direction = robotParameters[2].DirectionParameterParser();
+                                        faceDirection.Direction = robotParameters[2].DirectionParameterParser();
 
                                         robotPosition.X = Int32.Parse(robotParameters[0]);
                                         robotPosition.Y = Int32.Parse(robotParameters[1]);
-                                        //Redundant
-                                        //var positionUpdate = _toyRobotBehaviourService.RobotPlacement(robotPosition, initialFaceDirection);
 
                                         robotDto.ToyRobot.TableDimensions = tableDimensions;
                                         robotDto.ToyRobot.Position = robotPosition;
@@ -99,6 +97,8 @@ namespace Data.Service.Services
                             robotDto.ToyRobot.RoboFaceDirection = faceDirection;
 
                             break;
+
+                        //clock-wise Rotation
                         case Commands.RIGHT:
                             direction = inputCommand.ComandToExecute.ToyBehaviourResponse.RoboFaceDirection.Direction.ToString().DirectionParameterParser();
                             faceDirection.Direction = _toyRobotBehaviourService.GetRotation(direction, Constants.rotationRightValue);

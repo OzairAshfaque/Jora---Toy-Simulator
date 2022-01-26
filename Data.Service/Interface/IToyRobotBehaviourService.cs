@@ -8,8 +8,8 @@ namespace Data.Service.Interface
 {
     public interface IToyRobotBehaviourService
     {
-        //Redundant
-        public string RobotPlacement(Coordinates robotPosition, Directions faceDirection);
+ 
+
 
         public Coordinates GetNextCoordinates(Coordinates previousPosition, Directions robotDirection );
 

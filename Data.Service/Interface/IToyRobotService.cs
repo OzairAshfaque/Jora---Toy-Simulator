@@ -11,8 +11,7 @@ namespace Data.Service.Interface
     public interface IToyRobotService
     {
         public ToyRobotResponse Initialization(int row, int column);
-        public CommandRobotResponse RobotResponse(CommandRobotResponse commandDto);
+
         public ToyRobotResponse RobotCommand(CommandUpdateResponse inputCommand);
-        public string ToyRobotReport(CommandUpdateResponse report);
     }
 }

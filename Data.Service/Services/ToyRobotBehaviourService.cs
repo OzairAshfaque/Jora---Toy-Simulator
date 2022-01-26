@@ -40,10 +40,6 @@ namespace Data.Service.Services
             return direction.Rotation(rotationalValue);
         }
 
-        //Redundant
-        public string RobotPlacement(Coordinates robotPosition, Directions faceDirection)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

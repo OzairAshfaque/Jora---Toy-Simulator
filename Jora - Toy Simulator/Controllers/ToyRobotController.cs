@@ -15,9 +15,9 @@ namespace Jora___Toy_Simulator.Controllers
     public class ToyRobotController : BaseApiController
     {
         private readonly IToyRobotService _toyRobotService;
-       public ToyRobotController(IToyRobotService tableService) 
+       public ToyRobotController(IToyRobotService toyRobotServic) 
         {
-            _toyRobotService = tableService;
+            _toyRobotService = toyRobotServic;
         }
 
 
@@ -29,7 +29,7 @@ namespace Jora___Toy_Simulator.Controllers
             try
             {
                 response = _toyRobotService.Initialization(5, 5);
-                HttpContext.Session.SetString("ToyRobotData", JsonSerializer.Serialize(response.ToyRobot));
+            //    HttpContext.Session.SetString("ToyRobotData", JsonSerializer.Serialize(response.ToyRobot));
             }
             catch (Exception ex)
             {
@@ -39,26 +39,7 @@ namespace Jora___Toy_Simulator.Controllers
             return Ok(JsonSerializer.Serialize(response.ToyRobot.TableDimensions)); ;
 
         }
-        //redundant
-        [HttpGet]
-        [ActionName("command")]
-        public ActionResult<ToyRobotResponse> RobotCommand([FromBody] CommandRobotResponse commandDto)
-        {
-            CommandRobotResponse response = new CommandRobotResponse();
-            try
-            {
-                response = _toyRobotService.RobotResponse(commandDto);
 
-
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            return Ok(JsonSerializer.Serialize(response)); 
-
-        }
 
         [HttpPost]
         [ActionName("commandupdate")]
@@ -91,23 +72,6 @@ namespace Jora___Toy_Simulator.Controllers
 
         }
 
-        [HttpGet]
-        [ActionName("report")]
-        public ActionResult<dynamic> Report(CommandUpdateResponse getReportString)
-        {
-            dynamic report = null;
-            try
-            {
-                report = _toyRobotService.ToyRobotReport(getReportString);
 
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-            return Ok(JsonSerializer.Serialize(report));
-
-        }
     }
 }

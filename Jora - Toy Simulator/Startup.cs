@@ -4,16 +4,12 @@ using Data.Service.Services;
 using Data.Services.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Jora___Toy_Simulator
 {
@@ -33,11 +29,11 @@ namespace Jora___Toy_Simulator
             services.AddTransient<ICommandParserService, CommandParserService>();
             services.AddTransient<IToyRobotBehaviourService, ToyRobotBehaviourService>();
             
-            services.AddDistributedMemoryCache();
-            services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);//You can set Time   
-            });
-            // services.AddCors();
+            //services.AddDistributedMemoryCache();
+            //services.AddSession(options => {
+            //    options.IdleTimeout = TimeSpan.FromMinutes(30);//You can set Time   
+            //});
+
             services.AddCors(options => 
             {
                 options.AddDefaultPolicy(builder =>
@@ -45,7 +41,9 @@ namespace Jora___Toy_Simulator
                     builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
+
             services.AddControllers();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,18 +58,17 @@ namespace Jora___Toy_Simulator
 
             app.UseRouting();
 
-            app.UseSession();
+         //   app.UseSession();
             app.UseCors();
-            //app.UseCors(policy => policy
-            //.AllowAnyHeader()
-            //.AllowAnyMethod().AllowCredentials()
-            //.WithOrigins("http://localhost:4200/"));
-            // app.UseAuthorization();
+            app.UseStaticFiles();
+
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+    
         }
     }
 }
